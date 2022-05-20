@@ -1,6 +1,10 @@
 import express from 'express';
-import { getAllProductsHandler } from '../controller/productController';
+import { getAllProductsHandler, createNewProductHandler } from '../controller/productController';
+import { validateResource } from '../middleware/validateResource';
+import { createNewProductSchema } from '../schema/productSchema';
 
 export const productRouter = express.Router();
 
-productRouter.get("/api/products/", getAllProductsHandler) 
+productRouter.get("/api/products/", getAllProductsHandler)
+
+productRouter.post("/api/products/:productId", validateResource(createNewProductSchema), createNewProductHandler);
