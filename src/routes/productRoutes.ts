@@ -7,4 +7,4 @@ export const productRouter = express.Router();
 
 productRouter.get("/api/products/", getAllProductsHandler)
 
-productRouter.post("/api/products/:productId", validateResource(createNewProductSchema), createNewProductHandler);
+productRouter.post("/api/products/new", validateResource(createNewProductSchema), createNewProductHandler);
