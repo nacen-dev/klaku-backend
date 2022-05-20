@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { createNewProductInput } from "../schema/productSchema";
 import { createNewProduct, getAllProducts } from "../service/productService";
 
 export const getAllProductsHandler = async (req: Request, res: Response) => {
@@ -12,7 +13,7 @@ export const getAllProductsHandler = async (req: Request, res: Response) => {
   }
 };
 
-export const createNewProductHandler = async (req: Request, res: Response) => {
+export const createNewProductHandler = async (req: Request<{}, {}, createNewProductInput>, res: Response) => {
   const body = req.body;
   try { 
     const product = await createNewProduct(body);
