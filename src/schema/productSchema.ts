@@ -11,9 +11,9 @@ export const createNewProductSchema = object({
     image: string({
       required_error: "Image is required",
     }),
-    price: string({
+    price: number({
       required_error: "Price is required",
-    }),
+    }).gte(0),
     category: string({
       required_error: "Category is required",
     }),
@@ -22,3 +22,5 @@ export const createNewProductSchema = object({
     }).gte(0)
   })
 });
+
+export type createNewProductInput = TypeOf<typeof createNewProductSchema>["body"]
