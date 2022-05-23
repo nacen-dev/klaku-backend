@@ -19,21 +19,24 @@ export const verifyProductSchema = object({
     }),
     quantity: number({
       required_error: "Quantity is required",
-    }).gte(0),
+    }).int({message: "Quantity must be an integer"}).positive({message: "Quantity must be greater than or equal to 1"}),
     size: string().optional(),
     color: string().optional(),
     reviews:  object({
       name: string({required_error: "Reviewer name is required"}),
       comment: string({required_error: "Comment is required"}),
-      rating: number({required_error: "Rating is required"})
+      rating: number({required_error: "Rating is required"}).positive({message: "Rating must be less than or equal to 5"})
+      .lte(5, { message: "Rating must be less than or equal to 5"})
     }).array().optional(),
-    rating: number().optional(),
+    rating: number().positive({message: "Rating must be less than or equal to 5"})
+                    .lte(5, { message: "Rating must be less than or equal to 5"})
+                    .optional(),
   })
 });
 
 export const verifyProductIdSchema = object({
   params: object({
-    id: string({
+    productId: string({
       required_error: "Id is required"
     })
   })
