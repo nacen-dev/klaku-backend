@@ -23,4 +23,13 @@ export const createNewProductSchema = object({
   })
 });
 
+export const verifyProductIdSchema = object({
+  params: object({
+    id: string({
+      required_error: "Id is required"
+    })
+  })
+})
+
 export type createNewProductInput = TypeOf<typeof createNewProductSchema>["body"]
+export type verifyProductIdInput = TypeOf<typeof verifyProductIdSchema>["params"];
