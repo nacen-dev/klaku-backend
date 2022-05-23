@@ -14,3 +14,11 @@ export const createNewProduct = (product: Partial<Product>) => {
 export const getProductById = (id: string) => {
   return ProductModel.findById(id);
 }
+
+export const deleteProductById = (id: string) => {
+  return ProductModel.findByIdAndDelete(id);
+}
+
+export const updateProductById = (id: string, data: Product) => {
+  return ProductModel.findByIdAndUpdate(id, data);
+}
