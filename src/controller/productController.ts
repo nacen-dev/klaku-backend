@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { createNewProductInput, verifyProductIdInput } from "../schema/productSchema";
-import { createNewProduct, getAllProducts, getProductById } from "../service/productService";
+import { verifyProductInput, verifyProductIdInput } from "../schema/productSchema";
+import { createNewProduct, getAllProducts, getProductById, updateProductById } from "../service/productService";
 
 export const getAllProductsHandler = async (req: Request, res: Response) => {
   try {
@@ -13,11 +13,11 @@ export const getAllProductsHandler = async (req: Request, res: Response) => {
   }
 };
 
-export const createNewProductHandler = async (req: Request<{}, {}, createNewProductInput>, res: Response) => {
+export const createNewProductHandler = async (req: Request<{}, {}, verifyProductInput>, res: Response) => {
   const body = req.body;
   try { 
     const product = await createNewProduct(body);
-    return res.send("Product successfully created")
+    return res.status(200).json(product);
   } catch(error) {
     return res.status(500).json(error)
   }
@@ -28,6 +28,17 @@ export const getProductByIdHandler = async (req: Request<verifyProductIdInput>, 
   try {
     const product = await getProductById(productId);
     return res.send(product);;
+  } catch(error) {
+    return res.status(500).json(error);
+  }
+}
+
+export const updateProductByIdHandler = async (req: Request<verifyProductIdInput, {}, verifyProductInput>, res: Response) => {
+  const productId = req.params.id;
+  const productData = req.body;
+  try {
+    const product = await updateProductById(productId, productData);
+    return res.send(product);
   } catch(error) {
     return res.status(500).json(error);
   }
