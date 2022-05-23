@@ -33,14 +33,14 @@ export class Product {
   @prop({ required: true})
   category: string;
 
-  @prop({min: 0, max: 5})
+  @prop({min: 0, max: 5, default: 0})
   rating: number;
 
   @prop({required: true})
   quantity: number;  
 
-  @prop()
-  review: Review;
+  @prop({type: () => [Review], default: []})
+  reviews: Review[];
 }
 
 export const ProductModel = getModelForClass(Product, {
