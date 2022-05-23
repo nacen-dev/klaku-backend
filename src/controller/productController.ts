@@ -24,7 +24,7 @@ export const createNewProductHandler = async (req: Request<{}, {}, verifyProduct
 }
 
 export const getProductByIdHandler = async (req: Request<verifyProductIdInput>, res: Response) => {
-  const productId = req.params.id;
+  const productId = req.params.productId;
   try {
     const product = await getProductById(productId);
     return res.send(product);;
@@ -34,8 +34,9 @@ export const getProductByIdHandler = async (req: Request<verifyProductIdInput>, 
 }
 
 export const updateProductByIdHandler = async (req: Request<verifyProductIdInput, {}, verifyProductInput>, res: Response) => {
-  const productId = req.params.id;
+  const productId = req.params.productId;
   const productData = req.body;
+  
   try {
     const product = await updateProductById(productId, productData);
     return res.send(product);
