@@ -10,3 +10,7 @@ export const getAllProducts = (category?: string) => {
 export const createNewProduct = (product: Partial<Product>) => {
   return ProductModel.create(product);
 }
+
+export const getProductById = (id: string) => {
+  return ProductModel.findById(id);
+}
