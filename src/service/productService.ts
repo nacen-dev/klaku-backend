@@ -20,5 +20,5 @@ export const deleteProductById = (id: string) => {
 }
 
 export const updateProductById = (id: string, data: Partial<Product>) => {
-  return ProductModel.findByIdAndUpdate(id, data);
+  return ProductModel.findByIdAndUpdate(id, data, { new: true});
 }
