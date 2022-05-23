@@ -11,14 +11,6 @@ export const verifyProductSchema = object({
     image: string({
       required_error: "Image is required",
     }),
-    size: string(),
-    color: string(),
-    reviews:  object({
-      name: string({required_error: "Reviewer name is required"}),
-      comment: string({required_error: "Comment is required"}),
-      rating: number({required_error: "Rating is required"})
-    }).array(),
-    rating: number(),
     price: number({
       required_error: "Price is required",
     }).gte(0),
@@ -27,7 +19,15 @@ export const verifyProductSchema = object({
     }),
     quantity: number({
       required_error: "Quantity is required",
-    }).gte(0)
+    }).gte(0),
+    size: string().optional(),
+    color: string().optional(),
+    reviews:  object({
+      name: string({required_error: "Reviewer name is required"}),
+      comment: string({required_error: "Comment is required"}),
+      rating: number({required_error: "Rating is required"})
+    }).array().optional(),
+    rating: number().optional(),
   })
 });
 
