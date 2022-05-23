@@ -1,6 +1,6 @@
 import { object, string, number, TypeOf } from "zod";
 
-export const createNewProductSchema = object({
+export const verifyProductSchema = object({
   body: object({
     name: string({
       required_error: "Name is required",
@@ -11,6 +11,14 @@ export const createNewProductSchema = object({
     image: string({
       required_error: "Image is required",
     }),
+    size: string(),
+    color: string(),
+    reviews:  object({
+      name: string({required_error: "Reviewer name is required"}),
+      comment: string({required_error: "Comment is required"}),
+      rating: number({required_error: "Rating is required"})
+    }).array(),
+    rating: number(),
     price: number({
       required_error: "Price is required",
     }).gte(0),
@@ -31,5 +39,5 @@ export const verifyProductIdSchema = object({
   })
 })
 
-export type createNewProductInput = TypeOf<typeof createNewProductSchema>["body"]
+export type verifyProductInput = TypeOf<typeof verifyProductSchema>["body"]
 export type verifyProductIdInput = TypeOf<typeof verifyProductIdSchema>["params"];
