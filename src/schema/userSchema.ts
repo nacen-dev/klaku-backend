@@ -56,9 +56,17 @@ export const resetPasswordSchema = object({
   }),
 });
 
+export const verifyUserIdSchema = object({
+  params: object({
+    userId: string({ required_error: "Id is required" }).regex(
+      /^[0-9a-fA-F]{24}$/,
+      { message: "Invalid format" }
+    ),
+  }),
+});
+
+export type VerifyUserIdInput = TypeOf<typeof verifyUserIdSchema>["params"];
 export type CreateUserInput = TypeOf<typeof createUserSchema>["body"];
-
 export type VerifyUserInput = TypeOf<typeof verifyUserSchema>["params"];
-
 export type ForgotPasswordInput = TypeOf<typeof forgotPasswordSchema>["body"];
 export type ResetPasswordInput = TypeOf<typeof resetPasswordSchema>;
