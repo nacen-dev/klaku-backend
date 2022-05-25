@@ -49,8 +49,6 @@ export const deleteProductByIdHandler = async (req: Request<verifyProductIdInput
   const productId = req.params.productId;
   try {
     const product = await deleteProductById(productId);
-    console.log(product);
-    
     if (product) return res.status(204).end();
     return res.status(404).json({message: "Product does not exist"});
   } catch (error) {
