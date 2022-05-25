@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { verifyProductInput, verifyProductIdInput } from "../schema/productSchema";
-import { createNewProduct, getAllProducts, getProductById, updateProductById } from "../service/productService";
+import { createNewProduct, deleteProductById, getAllProducts, getProductById, updateProductById } from "../service/productService";
 
 export const getAllProductsHandler = async (req: Request, res: Response) => {
   try {
@@ -41,6 +41,19 @@ export const updateProductByIdHandler = async (req: Request<verifyProductIdInput
     const product = await updateProductById(productId, productData);
     return res.send(product);
   } catch(error) {
+    return res.status(500).json(error);
+  }
+}
+
+export const deleteProductByIdHandler = async (req: Request<verifyProductIdInput>, res: Response) => {
+  const productId = req.params.productId;
+  try {
+    const product = await deleteProductById(productId);
+    console.log(product);
+    
+    if (product) return res.status(204).end();
+    return res.status(404).json({message: "Product does not exist"});
+  } catch (error) {
     return res.status(500).json(error);
   }
 }
