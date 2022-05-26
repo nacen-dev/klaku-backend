@@ -1,4 +1,4 @@
-import { object, string, TypeOf } from "zod";
+import { object, string, TypeOf, undefined as zodUndefined } from "zod";
 
 export const createUserSchema = object({
   body: object({
@@ -21,7 +21,9 @@ export const createUserSchema = object({
     message: "Passwords do not match",
     path: ["passwordConfirmation"],
   }),
-});
+  query: object({}).optional(),
+  params: object({}).optional()
+}).strict();
 
 export const verifyUserSchema = object({
   params: object({
