@@ -44,8 +44,6 @@ export const verifyUserHandler = async (
   const id = req.params.id;
   const verificationCode = req.params.verificationCode;
 
-  console.log("Inside verify user handler");
-
   const user = await findUserById(id);
   if (!user) {
     return res.send("Could not verify user.");
