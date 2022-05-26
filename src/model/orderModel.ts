@@ -57,8 +57,6 @@ export class Order {
   @prop({ ref: () => User, required: true })
   user: Ref<User>;
 
-  @prop()
-  paidAt: Date;
 }
 
 export const OrderModel = getModelForClass(Order, {

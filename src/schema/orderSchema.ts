@@ -11,8 +11,7 @@ export const verifyOrderIdSchema = object({
 
 export const verifyOrderUpdateSchema = object({
   body: object({
-    paidAt: date().optional(),
-    orderStatus: zodEnum([
+    status: zodEnum([
       "To Pay",
       "To Ship",
       "To Receive",
