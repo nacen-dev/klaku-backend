@@ -12,12 +12,8 @@ export const verifyOrderIdSchema = object({
 export const verifyOrderUpdateSchema = object({
   body: object({
     status: zodEnum([
-      "To Pay",
-      "To Ship",
       "To Receive",
       "Completed",
-      "Cancelled",
-      "Return/Refund",
     ]),
   }),
 });
