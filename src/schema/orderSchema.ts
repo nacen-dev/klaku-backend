@@ -1,4 +1,4 @@
-import { object, string, number, TypeOf } from "zod";
+import { object, string, TypeOf, date, enum as zodEnum } from "zod";
 
 export const verifyOrderIdSchema = object({
   params: object({
@@ -9,5 +9,19 @@ export const verifyOrderIdSchema = object({
   }),
 });
 
+export const verifyOrderUpdateSchema = object({
+  body: object({
+    paidAt: date().optional(),
+    orderStatus: zodEnum([
+      "To Pay",
+      "To Ship",
+      "To Receive",
+      "Completed",
+      "Cancelled",
+      "Return/Refund",
+    ]),
+  }),
+});
 
 export type VerifyOrderIdInput = TypeOf<typeof verifyOrderIdSchema>["params"];
+export type VerifyOrderUpdateInput = TypeOf<typeof verifyOrderUpdateSchema>["body"]
