@@ -4,7 +4,7 @@ import {
   VerifyOrderUpdateInput,
 } from "../schema/orderSchema";
 import { VerifyUserIdInput } from "../schema/userSchema";
-import { getAllOrders, getAllOrdersByUserId, updateOrder } from "../service/orderService";
+import { getAllOrders, getAllOrdersByUserId, getOrderById, updateOrder } from "../service/orderService";
 
 export const getAllOrdersByUserIdHandler = async (
   req: Request<VerifyUserIdInput>,
@@ -17,6 +17,16 @@ export const getAllOrdersByUserIdHandler = async (
     return res.status(500).json(error);
   }
 };
+
+export const getOrderByIdHandler = async (req: Request<VerifyOrderIdInput>, res: Response) => {
+  try {
+    const order = await getOrderById(req.params.orderId);
+    if (order && res.locals.user._id !== order.user) return res.sendStatus(403)
+    return res.status(200).json(order);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+}
 
 export const getAllOrdersHandler = async (req: Request, res: Response) => {
   try {
