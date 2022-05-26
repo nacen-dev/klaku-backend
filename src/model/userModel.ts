@@ -57,6 +57,9 @@ export class User {
   @prop({ default: false })
   verified: boolean;
 
+  @prop({default: false})
+  isAdmin: boolean;
+
   async validatePassword(this: DocumentType<User>, inputPassword: string) {
     try {
       return await argon2.verify(this.password, inputPassword);
