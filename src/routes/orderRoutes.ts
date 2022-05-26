@@ -5,11 +5,16 @@ import {
   updateOrderHandler,
 } from "../controller/orderController";
 import { validateResource } from "../middleware/validateResource";
-import { verifyUserIdSchema } from "../schema/userSchema";
 import { requireAdmin } from "../middleware/requireAdmin";
+import { verifyOrderUpdateSchema } from "../schema/orderSchema";
 
 export const orderRouter = express.Router();
 
 orderRouter.get("/api/orders", requireAdmin, getAllOrdersHandler);
 
-orderRouter.put("/api/orders/:orderId", requireAdmin, updateOrderHandler);
+orderRouter.put(
+  "/api/orders/:orderId",
+  requireAdmin,
+  validateResource(verifyOrderUpdateSchema),
+  updateOrderHandler
+);
