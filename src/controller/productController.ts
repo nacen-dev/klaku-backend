@@ -27,7 +27,7 @@ export const getProductByIdHandler = async (req: Request<verifyProductIdInput>, 
   const productId = req.params.productId;
   try {
     const product = await getProductById(productId);
-    return res.send(product);;
+    return res.status(200).json(product);;
   } catch(error) {
     return res.status(500).json(error);
   }
@@ -39,7 +39,7 @@ export const updateProductByIdHandler = async (req: Request<verifyProductIdInput
   
   try {
     const product = await updateProductById(productId, productData);
-    return res.send(product);
+    return res.status(200).json(product);
   } catch(error) {
     return res.status(500).json(error);
   }
