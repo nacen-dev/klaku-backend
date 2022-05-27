@@ -15,3 +15,7 @@ export const getAllOrders = () => {
 export const updateOrder = (orderId: string, data: Partial<Order>) => {
   return OrderModel.findByIdAndUpdate(orderId, data, { new: true});
 }
+
+export const createOrder = (order: Partial<Order>) => {
+  return OrderModel.create(order)
+}
