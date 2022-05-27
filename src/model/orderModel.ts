@@ -2,7 +2,7 @@ import { getModelForClass, prop, Ref } from "@typegoose/typegoose";
 import { Product } from "./productModel";
 import { User } from "./userModel";
 
-class OrderItem {
+export class OrderItem {
   @prop({ required: true })
   name: string;
 
@@ -14,6 +14,12 @@ class OrderItem {
 
   @prop({ required: true })
   price: number;
+
+  @prop()
+  size: string;
+
+  @prop()
+  color: string;
 
   @prop({ required: true, ref: () => Product })
   product: Ref<Product>;
