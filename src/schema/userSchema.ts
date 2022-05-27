@@ -17,13 +17,13 @@ export const createUserSchema = object({
     email: string({
       required_error: "Email is required",
     }).email("Not a valid email"),
-  }).refine((data) => data.password === data.passwordConfirmation, {
-    message: "Passwords do not match",
-    path: ["passwordConfirmation"],
-  }),
-  query: object({}).optional(),
-  params: object({}).optional()
-}).strict();
+  })
+    .strict()
+    .refine((data) => data.password === data.passwordConfirmation, {
+      message: "Passwords do not match",
+      path: ["passwordConfirmation"],
+    }),
+});
 
 export const verifyUserSchema = object({
   params: object({
