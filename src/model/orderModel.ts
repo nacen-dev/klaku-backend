@@ -20,23 +20,29 @@ class OrderItem {
 }
 
 class ShippingAddress {
-  @prop({required: true})
+  @prop({ required: true })
   fullName: string;
 
-  @prop({required: true})
+  @prop({ required: true })
   address: string;
-  @prop({required: true})
+  @prop({ required: true })
   city: string;
-  @prop({required: true})
+  @prop({ required: true })
   postalCode: string;
-  @prop({required: true})
+  @prop({ required: true })
   country: string;
 }
 
-type OrderStatus = "To Pay" | "To Ship" | "To Receive" | "Completed" | "Cancelled" | "Return/Refund"
+type OrderStatus =
+  | "To Pay"
+  | "To Ship"
+  | "To Receive"
+  | "Completed"
+  | "Cancelled"
+  | "Return/Refund";
 
 export class Order {
-  @prop({ required: true})
+  @prop({ required: true })
   status: OrderStatus;
 
   @prop({ required: true, type: () => OrderItem })
@@ -45,8 +51,8 @@ export class Order {
   @prop({ required: true })
   taxPrice: number;
 
-  @prop({required: true})
-  shippingAddress: ShippingAddress
+  @prop({ required: true })
+  shippingAddress: ShippingAddress;
 
   @prop({ required: true })
   shippingPrice: number;
@@ -56,7 +62,6 @@ export class Order {
 
   @prop({ ref: () => User, required: true })
   user: Ref<User>;
-
 }
 
 export const OrderModel = getModelForClass(Order, {
