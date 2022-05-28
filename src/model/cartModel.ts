@@ -1,8 +1,12 @@
 import { getModelForClass, prop, Ref } from "@typegoose/typegoose";
+import { Product } from "./productModel";
 import { User } from "./userModel";
 
-interface CartItems {
-  productId: string;
+export class CartItem {
+  @prop({ required: true, ref: () => Product, unique: true })
+  productId: Product;
+
+  @prop({ required: true, min: 1 })
   quantity: number;
 }
 
@@ -11,7 +15,7 @@ export class Cart {
   user: Ref<User>;
 
   @prop({ default: [] })
-  items: CartItems[];
+  items: CartItem[];
 }
 
 export const CartModel = getModelForClass(Cart);
