@@ -14,12 +14,12 @@ export class Cart {
   @prop({ required: true, ref: () => User, unique: true })
   user: Ref<User>;
 
-  @prop({ default: [] })
+  @prop({ default: [], type: () => [CartItem] })
   items: CartItem[];
 }
 
 export const CartModel = getModelForClass(Cart, {
   options: {
-    allowMixed: Severity.ERROR
-  }
+    allowMixed: Severity.ERROR,
+  },
 });
