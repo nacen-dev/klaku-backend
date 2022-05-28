@@ -3,7 +3,7 @@ import { Product } from "./productModel";
 import { User } from "./userModel";
 
 export class CartItem {
-  @prop({ required: true, ref: () => Product, unique: true })
+  @prop({ required: true, ref: () => Product, unique: true, sparse: true })
   productId: Ref<Product>;
 
   @prop({ required: true, min: 1 })
