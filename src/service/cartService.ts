@@ -18,6 +18,6 @@ export const updateCartByUserId = (userId: string, cartData: Partial<Cart>) => {
   return CartModel.findOneAndUpdate(
     { user: userId },
     { $set: cartData },
-    { new: true }
+    { new: true, upsert: true }
   );
 };
