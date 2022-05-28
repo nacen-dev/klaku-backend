@@ -4,7 +4,7 @@ import { User } from "./userModel";
 
 export class CartItem {
   @prop({ required: true, ref: () => Product, unique: true })
-  productId: Product;
+  productId: Ref<Product>;
 
   @prop({ required: true, min: 1 })
   quantity: number;
