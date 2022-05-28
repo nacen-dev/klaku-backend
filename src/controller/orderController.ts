@@ -1,6 +1,6 @@
 import { Ref } from "@typegoose/typegoose";
 import { Request, Response } from "express";
-import { Order, OrderItem } from "../model/orderModel";
+import { OrderItem } from "../model/orderModel";
 import { User } from "../model/userModel";
 import {
   VerifyOrderCreateInput,
@@ -79,7 +79,7 @@ export const createOrderHandler = async (
     );
     const orderItemsData = await Promise.all(orderItemsPromise);
 
-    if (orderItemsData.some((orderItem) => orderItem === null))
+    if (!orderItemsData.every((orderItem) => orderItem !== null))
       return res.status(404).send("Invalid products provided");
 
     const orderItems = orderItemsData.map((orderItem, index) => ({
