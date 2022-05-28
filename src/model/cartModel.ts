@@ -1,4 +1,4 @@
-import { getModelForClass, prop, Ref } from "@typegoose/typegoose";
+import { getModelForClass, prop, Ref, Severity } from "@typegoose/typegoose";
 import { Product } from "./productModel";
 import { User } from "./userModel";
 
@@ -18,4 +18,8 @@ export class Cart {
   items: CartItem[];
 }
 
-export const CartModel = getModelForClass(Cart);
+export const CartModel = getModelForClass(Cart, {
+  options: {
+    allowMixed: Severity.ERROR
+  }
+});
