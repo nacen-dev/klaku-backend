@@ -11,6 +11,7 @@ export const getCartByUserIdHandler = async (
   try {
     const userId = req.params.userId;
     const cart = await getCartByUserId(userId);
+
     return res.status(200).json(cart);
   } catch (error) {
     return res.status(500).json(error);
@@ -24,7 +25,10 @@ export const updateCartByUserIdHandler = async (
   try {
     const userId = req.params.userId;
     const cartData = req.body;
-    const cart = await updateCartByUserId(userId, cartData as unknown as Partial<Cart>);
+    const cart = await updateCartByUserId(
+      userId,
+      cartData as unknown as Partial<Cart>
+    );
     return res.status(200).json(cart);
   } catch (error) {
     return res.status(500).json(error);
