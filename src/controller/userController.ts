@@ -14,6 +14,7 @@ import {
   findUserById,
   findUserByEmail,
 } from "../service/userService";
+import { createCart } from "../service/cartService";
 
 export const createUserHandler = async (
   req: Request<{}, {}, CreateUserInput>,
@@ -28,6 +29,7 @@ export const createUserHandler = async (
       subject: "Please verify your account",
       text: `Verification Code: ${user.verificationCode}. Id: ${user._id}`,
     });
+    await createCart(user._id);
     return res.send("User successfully created");
   } catch (e: any) {
     if (e.code === 11000) {
@@ -130,4 +132,4 @@ export const resetPasswordHandler = async (
 
 export const getCurrentUserHandler = async (req: Request, res: Response) => {
   return res.send(res.locals.user);
-}
+};
