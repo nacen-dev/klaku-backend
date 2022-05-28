@@ -37,7 +37,7 @@ export class Product {
   rating: number;
 
   @prop({required: true})
-  quantity: number;  
+  stock: number;  
 
   @prop({type: () => [Review], default: []})
   reviews: Review[];
