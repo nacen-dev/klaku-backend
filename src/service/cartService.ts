@@ -9,7 +9,7 @@ export const getCartByUserId = (userId: string) => {
     path: "items",
     populate: {
       path: "productId",
-      model: "Product"
+      model: "Product",
     },
   });
 };
