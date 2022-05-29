@@ -48,6 +48,20 @@ export const verifyProductIdSchema = object({
   }),
 });
 
+export const verifyProductItemsSchema = object({
+  body: object({
+    items: object({
+      productId: string({ required_error: "Product ID is required" }).regex(
+        /^[0-9a-fA-F]{24}$/,
+        { message: "Invalid format" }
+      ),
+    }).array(),
+  }).strict(),
+});
+
+export type VerifyProductItemsInput = TypeOf<
+  typeof verifyProductItemsSchema
+>["body"];
 export type verifyProductInput = TypeOf<typeof verifyProductSchema>["body"];
 export type verifyProductIdInput = TypeOf<
   typeof verifyProductIdSchema
