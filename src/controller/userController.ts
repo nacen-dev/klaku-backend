@@ -15,6 +15,7 @@ import {
   findUserByEmail,
 } from "../service/userService";
 import { createCart } from "../service/cartService";
+import { createWishlist } from "../service/wishlistService";
 
 export const createUserHandler = async (
   req: Request<{}, {}, CreateUserInput>,
@@ -25,11 +26,12 @@ export const createUserHandler = async (
     const user = await createUser(body);
     await sendEmail({
       from: "test@nacen.dev",
-      to: user.email,
+      to: "nacen.dev@gmail.com",
       subject: "Please verify your account",
       text: `Verification Code: ${user.verificationCode}. Id: ${user._id}`,
     });
     await createCart(user._id);
+    await createWishlist(user._id);
     return res.send("User successfully created");
   } catch (e: any) {
     if (e.code === 11000) {
