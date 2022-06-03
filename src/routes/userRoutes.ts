@@ -1,5 +1,4 @@
 import express from "express";
-import { getAllOrdersByUserIdHandler } from "../controller/orderController";
 import {
   createUserHandler,
   forgotPasswordHandler,
@@ -15,7 +14,6 @@ import {
   forgotPasswordSchema,
   resetPasswordSchema,
   verifyUserEmailSchema,
-  verifyUserIdSchema,
   verifyUserSchema,
 } from "../schema/userSchema";
 
@@ -53,9 +51,3 @@ userRouter.post(
 
 userRouter.get("/api/users/me", requireUser, getCurrentUserHandler);
 
-userRouter.get(
-  "/api/users/orders/:userId",
-  requireUser,
-  validateResource(verifyUserIdSchema),
-  getAllOrdersByUserIdHandler
-);

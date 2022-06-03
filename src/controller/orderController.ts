@@ -8,7 +8,6 @@ import {
   VerifyOrderIdInput,
   VerifyOrderUpdateInput,
 } from "../schema/orderSchema";
-import { VerifyUserIdInput } from "../schema/userSchema";
 import {
   createOrder,
   getAllOrders,
@@ -18,11 +17,11 @@ import {
 } from "../service/orderService";
 
 export const getAllOrdersByUserIdHandler = async (
-  req: Request<VerifyUserIdInput>,
+  req: Request,
   res: Response
 ) => {
   try {
-    const orders = await getAllOrdersByUserId(req.params.userId);
+    const orders = await getAllOrdersByUserId(res.locals.user._id);
     return res.status(200).json(orders);
   } catch (error) {
     return res.status(500).json(error);

@@ -18,7 +18,13 @@ import { checkIfValidProducts } from "../middleware/checkIfValidProducts";
 
 export const orderRouter = express.Router();
 
-orderRouter.get("/api/orders", requireAdmin, getAllOrdersHandler);
+orderRouter.get("/api/orders/all", requireAdmin, getAllOrdersHandler);
+
+orderRouter.get(
+  "/api/orders",
+  requireUser,
+  getAllOrdersByUserIdHandler
+);
 
 orderRouter.post(
   "/api/orders/create",
