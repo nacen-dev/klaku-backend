@@ -25,8 +25,8 @@ userRouter.post(
   createUserHandler
 );
 
-userRouter.post(
-  "/api/users/verify/:id/:verificationCode",
+userRouter.get(
+  "/api/users/verify/:email/:token",
   validateResource(verifyUserSchema),
   verifyUserHandler
 );

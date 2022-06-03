@@ -13,9 +13,12 @@ import {
   createUser,
   findUserById,
   findUserByEmail,
+  findUserByIdAndEmail,
 } from "../service/userService";
 import { createCart } from "../service/cartService";
 import { createWishlist } from "../service/wishlistService";
+import { createToken, deleteToken, findToken } from "../service/tokenService";
+import { createConfirmationURL } from "../utils/createConfirmationURL";
 
 export const createUserHandler = async (
   req: Request<{}, {}, CreateUserInput>,
@@ -24,15 +27,25 @@ export const createUserHandler = async (
   const body = req.body;
   try {
     const user = await createUser(body);
+    const token = await createToken(user._id);
+
     await sendEmail({
       from: "test@nacen.dev",
       to: "nacen.dev@gmail.com",
-      subject: "Please verify your account",
-      text: `Verification Code: ${user.verificationCode}. Id: ${user._id}`,
+      subject: "Account Verification Link",
+      text: `Hello ${
+        user.firstName
+      } Please verify your account by clicking the link: \n ${createConfirmationURL(
+        req.headers.host as string,
+        user.email,
+        token.token
+      )}`,
     });
     await createCart(user._id);
     await createWishlist(user._id);
-    return res.send("User successfully created");
+    return res.status(200).json({
+      message: `A verification email has been sent to ${user.email}. It will expire after 24 hours. If you did not get an email click on resend verification.`,
+    });
   } catch (e: any) {
     if (e.code === 11000) {
       return res.status(409).send("Account already exists.");
@@ -45,27 +58,37 @@ export const verifyUserHandler = async (
   req: Request<VerifyUserInput>,
   res: Response
 ) => {
-  const id = req.params.id;
-  const verificationCode = req.params.verificationCode;
+  const { email, token } = req.params;
+  try {
+    const tokenData = await findToken(token);
 
-  const user = await findUserById(id);
-  if (!user) {
-    return res.send("Could not verify user.");
-  }
+    if (!tokenData) {
+      return res.status(400).json({
+        message:
+          "Your verification link may have expired. Please click on resend to get a new verification link that will be sent to your email.",
+      });
+    }
 
-  if (user.verified) {
-    return res.send("User is already verified.");
-  }
+    const user = await findUserByIdAndEmail(tokenData.userId, email);
 
-  if (user.verificationCode === verificationCode) {
+    if (!user)
+      return res.status(401).json({ message: "Unable to verify user." });
+
+    if (user.verified)
+      return res
+        .status(200)
+        .json({ message: "User is already verified. Please login instead." });
+
     user.verified = true;
 
     await user.save();
 
-    return res.send("User successfully verified.");
-  }
+    await deleteToken(tokenData.userId);
 
-  return res.send("Could not verify user");
+    return res.status(200).json({ message: "User successfully verified." });
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
 export const forgotPasswordHandler = async (
