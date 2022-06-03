@@ -12,6 +12,10 @@ export const findToken = (token: string) => {
   return TokenModel.findOne({ token: token });
 };
 
+export const findTokenByEmail = (email: string) => {
+  return TokenModel.findOne({ email: email });
+};
+
 export const deleteToken = (userId: Ref<User>) => {
   return TokenModel.deleteOne({ userId: userId });
 };

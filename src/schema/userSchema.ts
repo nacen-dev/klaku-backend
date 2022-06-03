@@ -16,7 +16,7 @@ export const createUserSchema = object({
     }),
     email: string({
       required_error: "Email is required",
-    }).email("Not a valid email"),
+    }).email("Invalid email"),
   })
     .strict()
     .refine((data) => data.password === data.passwordConfirmation, {
@@ -69,8 +69,17 @@ export const verifyUserIdSchema = object({
   }),
 });
 
+export const verifyUserEmailSchema = object({
+  body: object({
+    email: string({ required_error: "Email is required." }).email(
+      "Invalid email"
+    ),
+  }).strict(),
+});
+
 export type VerifyUserIdInput = TypeOf<typeof verifyUserIdSchema>["params"];
 export type CreateUserInput = TypeOf<typeof createUserSchema>["body"];
 export type VerifyUserInput = TypeOf<typeof verifyUserSchema>["params"];
 export type ForgotPasswordInput = TypeOf<typeof forgotPasswordSchema>["body"];
 export type ResetPasswordInput = TypeOf<typeof resetPasswordSchema>;
+export type VerifyUserEmailInput = TypeOf<typeof verifyUserEmailSchema>["body"];

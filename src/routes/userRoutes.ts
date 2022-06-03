@@ -4,6 +4,7 @@ import {
   createUserHandler,
   forgotPasswordHandler,
   getCurrentUserHandler,
+  resendLinkHandler,
   resetPasswordHandler,
   verifyUserHandler,
 } from "../controller/userController";
@@ -13,6 +14,7 @@ import {
   createUserSchema,
   forgotPasswordSchema,
   resetPasswordSchema,
+  verifyUserEmailSchema,
   verifyUserIdSchema,
   verifyUserSchema,
 } from "../schema/userSchema";
@@ -23,6 +25,12 @@ userRouter.post(
   "/api/users",
   validateResource(createUserSchema),
   createUserHandler
+);
+
+userRouter.post(
+  "/api/users/verify/resend/",
+  validateResource(verifyUserEmailSchema),
+  resendLinkHandler
 );
 
 userRouter.get(

@@ -7,6 +7,7 @@ import {
   CreateUserInput,
   ForgotPasswordInput,
   ResetPasswordInput,
+  VerifyUserEmailInput,
   VerifyUserInput,
 } from "../schema/userSchema";
 import {
@@ -17,7 +18,7 @@ import {
 } from "../service/userService";
 import { createCart } from "../service/cartService";
 import { createWishlist } from "../service/wishlistService";
-import { createToken, deleteToken, findToken } from "../service/tokenService";
+import { createToken, deleteToken, findToken, findTokenByEmail } from "../service/tokenService";
 import { createConfirmationURL } from "../utils/createConfirmationURL";
 
 export const createUserHandler = async (
@@ -157,4 +158,57 @@ export const resetPasswordHandler = async (
 
 export const getCurrentUserHandler = async (req: Request, res: Response) => {
   return res.send(res.locals.user);
+};
+
+export const resendLinkHandler = async (
+  req: Request<{}, {}, VerifyUserEmailInput>,
+  res: Response
+) => {
+  const { email } = req.body;
+  try {
+    const user = await findUserByEmail(email);
+    if (!user) {
+      return res.status(200).json({
+        message:
+          "If the user is registered an email will be sent for verification",
+      });
+    }
+
+    if (user.verified) {
+      return res
+        .status(200)
+        .json({ message: "User is already verified. Please login instead." });
+    }
+    
+    // Check if token exist 
+    const token = await findTokenByEmail(email);
+    // Delete token if it exist
+    if (token) {
+      await deleteToken(token.userId)
+    }
+
+    // generate new token
+    const newToken = await createToken(user._id);
+    
+    await sendEmail({
+      from: "test@nacen.dev",
+      to: "nacen.dev@gmail.com",
+      subject: "Account Verification Link",
+      text: `Hello ${
+        user.firstName
+      } Please verify your account by clicking the link: \n ${createConfirmationURL(
+        req.headers.host as string,
+        user.email,
+        newToken.token
+      )}`,
+    });
+
+    return res.status(200).json({
+      message: `A verification email has been sent to ${user.email}. It will expire after 24 hours. If you did not get an email click on resend verification.`,
+    });
+
+
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
