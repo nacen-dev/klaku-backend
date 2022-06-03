@@ -5,11 +5,5 @@ export default {
   logLevel: "info",
   accessTokenPrivateKey: "",
   refreshTokenPrivateKey: "",
-  smtp: {
-    host: "smtp.ethereal.email",
-    user: "l55jskrj3mkrtdil@ethereal.email",
-    pass: "GqgF6wZs9pfDaUQRT6",
-    port: 587,
-    secure: false,
-  },
+  smtp: "",
 };
