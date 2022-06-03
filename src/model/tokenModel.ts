@@ -2,7 +2,7 @@ import { getModelForClass, prop, Ref } from "@typegoose/typegoose";
 import { User } from "./userModel";
 
 export class Token {
-  @prop({ required: true, type: () => User })
+  @prop({ required: true, ref: () => User})
   userId: Ref<User>;
   @prop({ required: true })
   token: string;
