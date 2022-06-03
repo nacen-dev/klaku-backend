@@ -10,5 +10,4 @@ export default {
     port: "SMTP_PORT",
     secure: "SMTP_SECURE",
   },
-  // smtp: "SMTP"
 };
