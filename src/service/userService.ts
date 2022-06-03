@@ -11,3 +11,7 @@ export const findUserById = (id: string) => {
 export const findUserByEmail = (email: string) => {
   return UserModel.findOne({ email });
 };
+
+export const findUserByIdAndEmail = (id: string, email: string) => {
+  return UserModel.findOne({ id, email });
+};
