@@ -27,8 +27,10 @@ export const createUserSchema = object({
 
 export const verifyUserSchema = object({
   params: object({
-    id: string(),
-    verificationCode: string(),
+    email: string({ required_error: "Email is required" }).email(
+      "Invalid email"
+    ),
+    token: string({ required_error: "Token is required" }),
   }),
 });
 
