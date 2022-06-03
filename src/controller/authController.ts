@@ -20,7 +20,7 @@ export const createSessionHandler = async (
   const user = await findUserByEmail(email);
 
   if (!user) {
-    return res.send(message);
+    return res.status(401).json({ message: message });
   }
 
   if (!user.verified) {
@@ -30,14 +30,14 @@ export const createSessionHandler = async (
   const isValid = await user.validatePassword(password);
 
   if (!isValid) {
-    return res.send(message);
+    return res.status(401).json({ message: message });
   }
 
   const accessToken = signAccessToken(user);
 
   const refreshToken = await signRefreshToken({ userId: user._id });
 
-  return res.send({
+  return res.status(200).json({
     accessToken,
     refreshToken,
   });
