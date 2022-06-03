@@ -48,3 +48,9 @@ export const ProductModel = getModelForClass(Product, {
     timestamps: true
   }
 });
+
+
+export interface ItemInterface extends Product {
+  _id: Ref<Product>,
+  quantity: number
+}
