@@ -6,12 +6,14 @@ const smtp = config.get<{
   user: string;
   pass: string;
   host: string;
-  port: number;
-  secure: boolean;
+  port: string;
+  secure: string;
 }>("smtp");
 
 const transporter = nodemailer.createTransport({
-  ...smtp,
+  host: smtp.host,
+  port: Number(smtp.port),
+  secure: smtp.secure == "true",
   auth: { user: smtp.user, pass: smtp.pass },
 });
 
@@ -20,6 +22,5 @@ export async function sendEmail(payload: SendMailOptions) {
     if (err) {
       log.error(err, "Error sending email");
     }
-    log.info(`Preview URL ${nodemailer.getTestMessageUrl(info)}`);
   });
 }
