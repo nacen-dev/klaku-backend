@@ -14,6 +14,7 @@ import {
   verifyOrderUpdateSchema,
 } from "../schema/orderSchema";
 import { requireUser } from "../middleware/requireUser";
+import { checkIfValidProducts } from "../middleware/checkIfValidProducts";
 
 export const orderRouter = express.Router();
 
@@ -23,6 +24,7 @@ orderRouter.post(
   "/api/orders/create",
   requireUser,
   validateResource(verifyOrderCreateSchema),
+  checkIfValidProducts,
   createOrderHandler
 );
 
