@@ -17,12 +17,12 @@ export const verifyOrderUpdateSchema = object({
 
 export const verifyOrderCreateSchema = object({
   body: object({
-    orderItems: object(
+    items: object(
       {
         quantity: number({
           required_error: "Product quantity is required",
         }).gte(1),
-        product: string({ required_error: "Product id is required" }).regex(
+        productId: string({ required_error: "Product id is required" }).regex(
           /^[0-9a-fA-F]{24}$/,
           { message: "Invalid format" }
         ),
@@ -42,7 +42,7 @@ export const verifyOrderCreateSchema = object({
       { required_error: "Shipping Address is required" }
     ),
     status: zodEnum(["To Pay", "To Ship"]),
-  }).strict(),
+  }),
 });
 
 export type VerifyOrderIdInput = TypeOf<typeof verifyOrderIdSchema>["params"];
