@@ -1,6 +1,7 @@
 import { Ref } from "@typegoose/typegoose";
 import { Request, Response } from "express";
 import { OrderItem } from "../model/orderModel";
+import { ItemInterface } from "../model/productModel";
 import { User } from "../model/userModel";
 import {
   VerifyOrderCreateInput,
@@ -15,7 +16,6 @@ import {
   getOrderById,
   updateOrder,
 } from "../service/orderService";
-import { getProductById } from "../service/productService";
 
 export const getAllOrdersByUserIdHandler = async (
   req: Request<VerifyUserIdInput>,
@@ -72,36 +72,28 @@ export const createOrderHandler = async (
   const orderData = req.body;
   const SHIPPING_PRICE = 2.5;
   const TAX_PRICE = 0.12;
+  const items: ItemInterface[] = res.locals.items;
 
   try {
-    const orderItemsPromise = orderData.orderItems.map((orderItem) =>
-      getProductById(orderItem.product)
+    const orderedItemsPrice = res.locals.items.reduce(
+      (total: number, item: ItemInterface) => {
+        return total + (item.price as number) * item.quantity;
+      },
+      0
     );
-    const orderItemsData = await Promise.all(orderItemsPromise);
-
-    if (!orderItemsData.every((orderItem) => orderItem !== null))
-      return res.status(404).send("Invalid products provided");
-
-    const orderItems = orderItemsData.map((orderItem, index) => ({
-      name: orderItem?.name,
-      quantity: orderData.orderItems[index].quantity,
-      image: orderItem?.image,
-      price: orderItem?.price,
-      size: orderItem?.size,
-      color: orderItem?.color,
-      product: orderItem?._id,
-    }));
-
-    const orderedItemsPrice = orderItems.reduce((total, orderItem) => {
-      return total + (orderItem.price as number) * orderItem.quantity;
-    }, 0);
 
     const totalPrice =
       orderedItemsPrice + SHIPPING_PRICE + TAX_PRICE * orderedItemsPrice;
+    console.log("items", items);
+
+    const orderItems: OrderItem[] = items.map((item) => ({
+      productId: item._id,
+      quantity: item.quantity,
+    }));
 
     const order = await createOrder({
       user: res.locals.user._id as Ref<User>,
-      orderItems: orderItems as OrderItem[],
+      items: orderItems,
       shippingAddress: orderData.shippingAddress,
       shippingPrice: SHIPPING_PRICE,
       status: orderData.status,
