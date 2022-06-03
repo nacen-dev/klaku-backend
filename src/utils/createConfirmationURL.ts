@@ -1,4 +1,4 @@
-export const createConfirmationURL = async (
+export const createConfirmationURL = (
   host: string,
   userEmail: string,
   token: string
