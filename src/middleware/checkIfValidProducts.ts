@@ -7,13 +7,17 @@ export const checkIfValidProducts = async (
   res: Response,
   next: NextFunction
 ) => {
-  const data = req.body;
-  const productsData = data.items.map((item) => getProductById(item.productId));
+  const { items } = req.body;
+  const productsData = items.map((item) => getProductById(item.productId));
   const productsQuery = await Promise.all(productsData);
   if (productsQuery.length === 0) return next();
-  if (!productsQuery.every((product) => product !== null)) {
-    console.log("invalid products")
+  if (productsQuery.some((product) => product === null)) {
+    console.log("invalid products");
     return res.status(404).send("Invalid products provided");
   }
+  res.locals.items = productsQuery.map((product, index) => ({
+    ...product,
+    quantity: items[index].quantity,
+  }));
   return next();
 };
