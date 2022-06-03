@@ -1,5 +1,5 @@
 import express from "express";
-import { updateWishlistHandler } from "../controller/wishlistController";
+import { getWishlistHandler, updateWishlistHandler } from "../controller/wishlistController";
 import { checkIfValidProducts } from "../middleware/checkIfValidProducts";
 import { requireUser } from "../middleware/requireUser";
 import { validateResource } from "../middleware/validateResource";
@@ -14,3 +14,5 @@ wishlistRouter.put(
   checkIfValidProducts,
   updateWishlistHandler
 );
+
+wishlistRouter.get("/api/wishlist", requireUser, getWishlistHandler)
