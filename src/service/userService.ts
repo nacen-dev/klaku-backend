@@ -1,3 +1,4 @@
+import { Ref } from "@typegoose/typegoose";
 import { User, UserModel } from "../model/userModel";
 
 export const createUser = (input: Partial<User>) => {
@@ -12,6 +13,6 @@ export const findUserByEmail = (email: string) => {
   return UserModel.findOne({ email });
 };
 
-export const findUserByIdAndEmail = (id: string, email: string) => {
+export const findUserByIdAndEmail = (id: Ref<User>, email: string) => {
   return UserModel.findOne({ id, email });
 };
