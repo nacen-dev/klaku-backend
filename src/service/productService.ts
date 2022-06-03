@@ -12,7 +12,7 @@ export const createNewProduct = (product: Partial<Product>) => {
 }
 
 export const getProductById = (id: string) => {
-  return ProductModel.findById(id);
+  return ProductModel.findById(id).lean();
 }
 
 export const deleteProductById = (id: string) => {
