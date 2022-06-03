@@ -4,25 +4,10 @@ import { User } from "./userModel";
 
 export class OrderItem {
   @prop({ required: true })
-  name: string;
-
-  @prop({ required: true })
   quantity: number;
 
-  @prop({ required: true })
-  image: string;
-
-  @prop({ required: true })
-  price: number;
-
-  @prop()
-  size: string;
-
-  @prop()
-  color: string;
-
   @prop({ required: true, ref: () => Product })
-  product: Ref<Product>;
+  productId: Ref<Product>;
 }
 
 class ShippingAddress {
@@ -52,7 +37,7 @@ export class Order {
   status: OrderStatus;
 
   @prop({ required: true, type: () => OrderItem })
-  orderItems: OrderItem[];
+  items: OrderItem[];
 
   @prop({ required: true })
   taxPrice: number;
