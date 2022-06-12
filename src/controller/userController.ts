@@ -45,13 +45,14 @@ export const createUserHandler = async (
     await createCart(user._id);
     await createWishlist(user._id);
     return res.status(200).json({
-      message: `A verification email has been sent to ${user.email}. It will expire after 24 hours. If you did not get an email click on resend verification.`,
+      message: `A verification email has been sent to ${user.email}. It will expire after 24 hours.`,
     });
   } catch (e: any) {
     if (e.code === 11000) {
-      return res.status(409).send("Account already exists.");
+      return res.status(409).send("The account already exists. Please login instead.");
     }
-    return res.status(500).send(e);
+    log.info(e)
+    return res.status(500).send("An error has occurred, please try again later.");
   }
 };
 
