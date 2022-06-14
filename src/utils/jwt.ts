@@ -23,15 +23,15 @@ export function signJwt(
 export function verifyJwt<T>(
   token: string,
   keyName: PublicKey
-): T | null {
+): { payload: T | null; expired: boolean } {
   const publicKey = Buffer.from(config.get<string>(keyName), "base64").toString(
     "ascii"
   );
 
   try {
-    const decoded = jwt.verify(token, publicKey) as T;
-    return decoded;
+    const decoded = jwt.verify(token, publicKey);
+    return { payload: decoded as T, expired: false };
   } catch (e) {
-    return null;
+    return { payload: null, expired: true };
   }
 }
