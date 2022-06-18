@@ -5,12 +5,14 @@ import { connectToDB } from "./utils/connectToDB";
 import { log } from "./utils/logger";
 import { indexRouter } from "./routes";
 import { deserializeUser } from "./middleware/deserializeUser";
-import cors from 'cors';
+import cors from "cors";
+import cookieParser from "cookie-parser";
 import { corsOptions } from "./options/corsOptions";
 
 const app = express();
-app.use(express.json())
-app.use(cors(corsOptions))
+app.use(express.json());
+app.use(cors(corsOptions));
+app.use(cookieParser());
 
 app.use(deserializeUser);
 
