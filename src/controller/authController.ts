@@ -3,7 +3,9 @@ import { get } from "lodash";
 
 import { CreateSessionInput } from "../schema/authSchema";
 import {
+  deleteSessionByUserId,
   findSessionById,
+  RefreshTokenObject,
   signAccessToken,
   signRefreshToken,
 } from "../service/authService";
@@ -20,7 +22,7 @@ export const createSessionHandler = async (
   const user = await findUserByEmail(email);
 
   if (!user) {
-    return res.status(401).json({ message: message });
+    return res.status(401).send(message);
   }
 
   if (!user.verified) {
@@ -30,16 +32,22 @@ export const createSessionHandler = async (
   const isValid = await user.validatePassword(password);
 
   if (!isValid) {
-    return res.status(401).json({ message: message });
+    return res.status(401).send(message);
   }
 
   const accessToken = signAccessToken(user);
 
   const refreshToken = await signRefreshToken({ userId: user._id });
 
+  res.cookie("jwt", refreshToken, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: 24 * 60 * 60 * 1000,
+  });
+
   return res.status(200).json({
     accessToken,
-    refreshToken,
   });
 };
 
@@ -50,14 +58,14 @@ export const refreshAccessTokenHandler = async (
   const refreshToken = get(req, "headers.x-refresh");
   const refreshMessage = "Could not refresh the access token";
 
-  const decoded = verifyJwt<{ session: string }>(
+  const { payload, expired } = verifyJwt<RefreshTokenObject>(
     refreshToken,
     "refreshTokenPublicKey"
   );
 
-  if (!decoded) return res.status(401).send(refreshMessage);
+  if (!payload) return res.status(401).send(refreshMessage);
 
-  const session = await findSessionById(decoded.session);
+  const session = await findSessionById(payload.session);
 
   if (!session || !session.valid) {
     return res.status(401).send(refreshMessage);
@@ -72,4 +80,20 @@ export const refreshAccessTokenHandler = async (
   const accessToken = signAccessToken(user);
 
   return res.send({ accessToken });
+};
+
+export const deleteSessionByUserIdHandler = async (
+  req: Request,
+  res: Response
+) => {
+  const user = res.locals.user;
+  try {
+    if (user) {
+      await deleteSessionByUserId(user._id);
+    }
+  } catch (error) {
+    return res.sendStatus(500);
+  }
+
+  return res.sendStatus(200);
 };
