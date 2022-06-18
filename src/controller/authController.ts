@@ -3,7 +3,7 @@ import { get } from "lodash";
 
 import { CreateSessionInput } from "../schema/authSchema";
 import {
-  deleteSessionByUserId,
+  deleteSessionById,
   findSessionById,
   RefreshTokenObject,
   signAccessToken,
@@ -11,6 +11,7 @@ import {
 } from "../service/authService";
 import { findUserByEmail, findUserById } from "../service/userService";
 import { verifyJwt } from "../utils/jwt";
+import { log } from "../utils/logger";
 
 export const createSessionHandler = async (
   req: Request<{}, {}, CreateSessionInput>,
@@ -39,7 +40,7 @@ export const createSessionHandler = async (
 
   const refreshToken = await signRefreshToken({ userId: user._id });
 
-  res.cookie("jwt", refreshToken, {
+  res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
     secure: true,
     sameSite: "none",
@@ -55,7 +56,9 @@ export const refreshAccessTokenHandler = async (
   req: Request,
   res: Response
 ) => {
-  const refreshToken = get(req, "headers.x-refresh");
+  const refreshToken = get(req, "cookies.refreshToken");
+  if (!refreshToken) return res.sendStatus(401);
+
   const refreshMessage = "Could not refresh the access token";
 
   const { payload, expired } = verifyJwt<RefreshTokenObject>(
@@ -63,7 +66,7 @@ export const refreshAccessTokenHandler = async (
     "refreshTokenPublicKey"
   );
 
-  if (!payload) return res.status(401).send(refreshMessage);
+  if (!payload || expired) return res.status(401).send(refreshMessage);
 
   const session = await findSessionById(payload.session);
 
@@ -86,14 +89,23 @@ export const deleteSessionByUserIdHandler = async (
   req: Request,
   res: Response
 ) => {
-  const user = res.locals.user;
-  try {
-    if (user) {
-      await deleteSessionByUserId(user._id);
-    }
-  } catch (error) {
-    return res.sendStatus(500);
+  const refreshToken = get(req, "cookies.refreshToken");
+  if (!refreshToken) return res.sendStatus(204);
+
+  const { payload } = verifyJwt<RefreshTokenObject>(
+    refreshToken,
+    "refreshTokenPublicKey"
+  );
+
+  if (payload) {
+    await deleteSessionById(payload.session);
   }
 
-  return res.sendStatus(200);
+  res.clearCookie("refreshToken", {
+    httpOnly: true,
+    sameSite: "none",
+    secure: true,
+  });
+
+  return res.sendStatus(204);
 };
