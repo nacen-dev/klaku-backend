@@ -3,9 +3,9 @@ import { omit } from "lodash";
 import { SessionModel } from "../model/sessionModel";
 import { privateFields, User } from "../model/userModel";
 import { signJwt } from "../utils/jwt";
-import { log } from "../utils/logger";
 
 type UserId = { userId: string };
+export type RefreshTokenObject = { session: string };
 
 export const createSession = async ({ userId }: UserId) => {
   return SessionModel.create({ user: userId });
@@ -29,7 +29,7 @@ export const signAccessToken = (user: DocumentType<User>) => {
   const payload = omit(user.toJSON(), privateFields);
 
   const accessToken = signJwt(payload, "accessTokenPrivateKey", {
-    expiresIn: "30d",
+    expiresIn: "1d",
   });
 
   return accessToken;
@@ -37,4 +37,12 @@ export const signAccessToken = (user: DocumentType<User>) => {
 
 export const findSessionById = (id: string) => {
   return SessionModel.findById(id);
-}
+};
+
+export const findSessionByUserId = (userId: string) => {
+  return SessionModel.findOne({ user: userId });
+};
+
+export const deleteSessionByUserId = (userId: string) => {
+  return SessionModel.deleteOne({ user: userId });
+};
