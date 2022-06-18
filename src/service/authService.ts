@@ -29,7 +29,7 @@ export const signAccessToken = (user: DocumentType<User>) => {
   const payload = omit(user.toJSON(), privateFields);
 
   const accessToken = signJwt(payload, "accessTokenPrivateKey", {
-    expiresIn: "1d",
+    expiresIn: "15s",
   });
 
   return accessToken;
@@ -39,10 +39,11 @@ export const findSessionById = (id: string) => {
   return SessionModel.findById(id);
 };
 
+export const deleteSessionById = (id: string) => {
+  return SessionModel.deleteOne({_id: id});
+}
+
 export const findSessionByUserId = (userId: string) => {
   return SessionModel.findOne({ user: userId });
 };
 
-export const deleteSessionByUserId = (userId: string) => {
-  return SessionModel.deleteOne({ user: userId });
-};
