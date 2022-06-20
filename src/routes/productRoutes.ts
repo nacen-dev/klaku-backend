@@ -4,6 +4,7 @@ import {
   createNewProductHandler,
   updateProductByIdHandler,
   deleteProductByIdHandler,
+  getProductByIdHandler,
 } from "../controller/productController";
 import { requireAdmin } from "../middleware/requireAdmin";
 import { validateResource } from "../middleware/validateResource";
@@ -15,6 +16,8 @@ import {
 export const productRouter = express.Router();
 
 productRouter.get("/api/products/", getAllProductsHandler);
+
+productRouter.get("/api/products/:productId", getProductByIdHandler);
 
 productRouter.post(
   "/api/products/new",
