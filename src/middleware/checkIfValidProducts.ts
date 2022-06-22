@@ -1,10 +1,15 @@
 import { NextFunction, Request, Response } from "express";
+import { Product } from "../model/productModel";
 import { VerifyProductItemsInput } from "../schema/productSchema";
 import { getProductById } from "../service/productService";
 
+export interface Item extends Product {
+  quantity: number;
+}
+
 export const checkIfValidProducts = async (
   req: Request<{}, {}, VerifyProductItemsInput>,
-  res: Response,
+  res: Response<{}, { items: Item[] }>,
   next: NextFunction
 ) => {
   const { items } = req.body;
@@ -18,6 +23,6 @@ export const checkIfValidProducts = async (
   res.locals.items = productsQuery.map((product, index) => ({
     ...product,
     quantity: items[index].quantity,
-  }));
+  })) as Item[];
   return next();
 };
