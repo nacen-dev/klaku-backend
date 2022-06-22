@@ -8,16 +8,14 @@ import {
   Severity,
 } from "@typegoose/typegoose";
 import argon2 from "argon2";
-import { nanoid } from "nanoid";
 import { log } from "../utils/logger";
 
 export const privateFields = [
   "password",
   "__v",
-  "verificationCode",
   "passwordResetCode",
-  "verified"
-]
+  "verified",
+];
 
 @pre<User>("save", async function () {
   if (this.isModified("password")) {
@@ -51,13 +49,10 @@ export class User {
   @prop()
   passwordResetCode: string | null;
 
-  @prop({ required: true, default: () => nanoid() })
-  verificationCode: string;
-
   @prop({ default: false })
   verified: boolean;
 
-  @prop({default: false})
+  @prop({ default: false })
   isAdmin: boolean;
 
   async validatePassword(this: DocumentType<User>, inputPassword: string) {
