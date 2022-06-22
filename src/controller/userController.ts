@@ -20,6 +20,7 @@ import { createCart } from "../service/cartService";
 import { createWishlist } from "../service/wishlistService";
 import { createToken, deleteToken, findToken, findTokenByEmail } from "../service/tokenService";
 import { createConfirmationURL } from "../utils/createConfirmationURL";
+import config from "config";
 
 export const createUserHandler = async (
   req: Request<{}, {}, CreateUserInput>,
@@ -29,6 +30,7 @@ export const createUserHandler = async (
   try {
     const user = await createUser(body);
     const token = await createToken(user._id);
+    const clientURL = config.get("clientURL")
 
     await sendEmail({
       from: "test@nacen.dev",
@@ -37,7 +39,7 @@ export const createUserHandler = async (
       text: `Hello ${
         user.firstName
       } Please verify your account by clicking the link: \n ${createConfirmationURL(
-        req.headers.host as string,
+        clientURL as string,
         user.email,
         token.token
       )}`,
