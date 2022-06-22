@@ -25,6 +25,10 @@ export const paymentHandler = async (
   res: Response<{}, { items: Item[] }>
 ) => {
   const cartItems = res.locals.items;
+  
+  if (!cartItems) {
+    return res.status(400).json({ error: "Cart is empty" });
+  }
 
   const subTotal = calculateSubTotal(cartItems);
 
