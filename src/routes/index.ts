@@ -3,6 +3,7 @@ import { authRouter } from "./authRoutes";
 import { cartRouter } from "./cartRoutes";
 import { orderRouter } from "./orderRoutes";
 import { productRouter } from "./productRoutes";
+import { stripeRouter } from "./stripeRoute";
 import { userRouter } from "./userRoutes";
 import { wishlistRouter } from "./wishListRoute";
 
@@ -16,3 +17,4 @@ indexRouter.use(productRouter);
 indexRouter.use(orderRouter);
 indexRouter.use(cartRouter);
 indexRouter.use(wishlistRouter);
+indexRouter.use(stripeRouter);
