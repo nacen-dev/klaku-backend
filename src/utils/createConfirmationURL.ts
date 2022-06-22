@@ -3,5 +3,5 @@ export const createConfirmationURL = (
   userEmail: string,
   token: string
 ) => {
-  return `${host}/api/users/verify?email=${userEmail}&token=${token}`;
+  return `${host}/verify?email=${userEmail}&token=${token}`;
 };
