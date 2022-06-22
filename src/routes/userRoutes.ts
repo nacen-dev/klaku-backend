@@ -31,8 +31,8 @@ userRouter.post(
   resendLinkHandler
 );
 
-userRouter.get(
-  "/api/users/verify/:email/:token",
+userRouter.post(
+  "/api/users/verify/",
   validateResource(verifyUserSchema),
   verifyUserHandler
 );
