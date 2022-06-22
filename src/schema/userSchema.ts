@@ -26,12 +26,12 @@ export const createUserSchema = object({
 });
 
 export const verifyUserSchema = object({
-  params: object({
+  body: object({
     email: string({ required_error: "Email is required" }).email(
       "Invalid email"
     ),
     token: string({ required_error: "Token is required" }),
-  }),
+  }).strict(),
 });
 
 export const forgotPasswordSchema = object({
@@ -79,7 +79,7 @@ export const verifyUserEmailSchema = object({
 
 export type VerifyUserIdInput = TypeOf<typeof verifyUserIdSchema>["params"];
 export type CreateUserInput = TypeOf<typeof createUserSchema>["body"];
-export type VerifyUserInput = TypeOf<typeof verifyUserSchema>["params"];
+export type VerifyUserInput = TypeOf<typeof verifyUserSchema>["body"];
 export type ForgotPasswordInput = TypeOf<typeof forgotPasswordSchema>["body"];
 export type ResetPasswordInput = TypeOf<typeof resetPasswordSchema>;
 export type VerifyUserEmailInput = TypeOf<typeof verifyUserEmailSchema>["body"];
