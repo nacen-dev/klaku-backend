@@ -18,7 +18,12 @@ import {
 } from "../service/userService";
 import { createCart } from "../service/cartService";
 import { createWishlist } from "../service/wishlistService";
-import { createToken, deleteToken, findToken, findTokenByEmail } from "../service/tokenService";
+import {
+  createToken,
+  deleteToken,
+  findToken,
+  findTokenByEmail,
+} from "../service/tokenService";
 import { createConfirmationURL } from "../utils/createConfirmationURL";
 import config from "config";
 
@@ -30,7 +35,7 @@ export const createUserHandler = async (
   try {
     const user = await createUser(body);
     const token = await createToken(user._id);
-    const clientURL = config.get("clientURL")
+    const clientURL = config.get("clientURL");
 
     await sendEmail({
       from: "test@nacen.dev",
@@ -51,18 +56,22 @@ export const createUserHandler = async (
     });
   } catch (e: any) {
     if (e.code === 11000) {
-      return res.status(409).send("The account already exists. Please login instead.");
+      return res
+        .status(409)
+        .send("The account already exists. Please login instead.");
     }
-    log.info(e)
-    return res.status(500).send("An error has occurred, please try again later.");
+    log.info(e);
+    return res
+      .status(500)
+      .send("An error has occurred, please try again later.");
   }
 };
 
 export const verifyUserHandler = async (
-  req: Request<VerifyUserInput>,
+  req: Request<{}, {}, VerifyUserInput>,
   res: Response
 ) => {
-  const { email, token } = req.params;
+  const { email, token } = req.body;
   try {
     const tokenData = await findToken(token);
 
@@ -70,18 +79,24 @@ export const verifyUserHandler = async (
       return res.status(400).json({
         message:
           "Your verification link may have expired. Please click on resend to get a new verification link that will be sent to your email.",
+        expired: true,
       });
     }
 
     const user = await findUserByIdAndEmail(tokenData.userId, email);
 
     if (!user)
-      return res.status(401).json({ message: "Unable to verify user." });
+      return res
+        .status(401)
+        .json({ message: "Unable to verify user.", expired: false });
 
     if (user.verified)
       return res
         .status(200)
-        .json({ message: "User is already verified. Please login instead." });
+        .json({
+          message: "User is already verified. Please login instead.",
+          verified: true,
+        });
 
     user.verified = true;
 
@@ -89,7 +104,9 @@ export const verifyUserHandler = async (
 
     await deleteToken(tokenData.userId);
 
-    return res.status(200).json({ message: "User successfully verified." });
+    return res
+      .status(200)
+      .json({ message: "User successfully verified.", verified: true });
   } catch (error) {
     return res.status(500).json(error);
   }
@@ -180,19 +197,24 @@ export const resendLinkHandler = async (
     if (user.verified) {
       return res
         .status(200)
-        .json({ message: "User is already verified. Please login instead." });
+        .json({
+          message: "User is already verified. Please login instead.",
+          verified: true,
+        });
     }
-    
-    // Check if token exist 
+
+    // Check if token exist
     const token = await findTokenByEmail(email);
     // Delete token if it exist
     if (token) {
-      await deleteToken(token.userId)
+      await deleteToken(token.userId);
     }
 
     // generate new token
     const newToken = await createToken(user._id);
-    
+
+    const clientURL = config.get("clientURL");
+
     await sendEmail({
       from: "test@nacen.dev",
       to: "nacen.dev@gmail.com",
@@ -200,7 +222,7 @@ export const resendLinkHandler = async (
       text: `Hello ${
         user.firstName
       } Please verify your account by clicking the link: \n ${createConfirmationURL(
-        req.headers.host as string,
+        clientURL as string,
         user.email,
         newToken.token
       )}`,
@@ -209,8 +231,6 @@ export const resendLinkHandler = async (
     return res.status(200).json({
       message: `A verification email has been sent to ${user.email}. It will expire after 24 hours. If you did not get an email click on resend verification.`,
     });
-
-
   } catch (error) {
     return res.status(500).json(error);
   }
