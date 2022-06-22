@@ -10,5 +10,6 @@ export default {
     port: "SMTP_PORT",
     secure: "SMTP_SECURE",
   },
-  stripeSecretKey: "STRIPE_SECRET_KEY"
+  stripeSecretKey: "STRIPE_SECRET_KEY",
+  clientURL: "CLIENT_URL"
 };
