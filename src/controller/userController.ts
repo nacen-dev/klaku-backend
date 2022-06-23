@@ -38,8 +38,8 @@ export const createUserHandler = async (
     const clientURL = config.get("clientURL");
 
     await sendEmail({
-      from: "test@nacen.dev",
-      to: "nacen.dev@gmail.com",
+      from: "klaku@klaku-clothing.vercel.app",
+      to: user.email,
       subject: "Account Verification Link",
       text: `Hello ${
         user.firstName
@@ -139,10 +139,10 @@ export const forgotPasswordHandler = async (
   await user.save();
 
   await sendEmail({
+    from: "klaku@klaku-clothing.vercel.app",
     to: user.email,
-    from: "test@example.com",
     subject: "Reset your password",
-    text: `Password reset code: ${passwordResetCode} ID: ${user.id}`,
+    text: `Password reset code: ${passwordResetCode}`,
   });
 
   log.debug(`Password reset email sent to ${user.email}`);
@@ -216,8 +216,8 @@ export const resendLinkHandler = async (
     const clientURL = config.get("clientURL");
 
     await sendEmail({
-      from: "test@nacen.dev",
-      to: "nacen.dev@gmail.com",
+      from: "klaku-clothing.vercel.app",
+      to: user.email,
       subject: "Account Verification Link",
       text: `Hello ${
         user.firstName
