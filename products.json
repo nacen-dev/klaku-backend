@@ -1,0 +1,385 @@
+[{
+  "_id": {
+    "$oid": "62a952411ffe61ab4c674c9e"
+  },
+  "name": "Brown Fedora Hat",
+  "description": "A hat for the cool, and traditional.",
+  "image": "https://images.unsplash.com/photo-1521402966881-852a3b2551fc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+  "price": 5,
+  "category": "hats",
+  "rating": 0,
+  "stock": 5,
+  "reviews": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1655263809819"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1655263809819"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a952f91ffe61ab4c674ca1"
+  },
+  "name": "Black Beanie",
+  "description": "Designed to keep you comfortable and fashionable.",
+  "image": "https://images.unsplash.com/photo-1578133079516-1ee38babf251?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+  "color": "black",
+  "price": 4,
+  "category": "hats",
+  "rating": 0,
+  "stock": 4,
+  "reviews": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1655263993613"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1655263993613"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a954041ffe61ab4c674ca4"
+  },
+  "name": "Red Beret",
+  "description": "Great Fit Wool Beret.",
+  "image": "https://images.unsplash.com/photo-1633353564060-c40de1198ced?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+  "color": "red",
+  "price": 6.5,
+  "category": "hats",
+  "rating": 0,
+  "stock": 2,
+  "reviews": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1655264260474"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1655264260474"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a954a61ffe61ab4c674ca7"
+  },
+  "name": "Straw Hat",
+  "description": "Simple and cool.",
+  "image": "https://images.unsplash.com/photo-1528219089976-22adb38bffa4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80",
+  "color": "brown",
+  "price": 3,
+  "category": "hats",
+  "rating": 0,
+  "stock": 1,
+  "reviews": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1655264422043"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1655264422043"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a957ec1ffe61ab4c674cab"
+  },
+  "name": "Black Long Sleeve",
+  "description": "Made with premium soft cotton designed to keep you warm and comfortable.",
+  "image": "https://images.unsplash.com/photo-1487611788822-148850a5ebc1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+  "size": "medium",
+  "color": "black",
+  "price": 10,
+  "category": "Mens",
+  "rating": 0,
+  "stock": 3,
+  "reviews": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1655265260407"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1655265260407"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a9593c1ffe61ab4c674cae"
+  },
+  "name": "Blue Suit",
+  "description": "Captures the aesthetically modern look for man.",
+  "image": "https://images.unsplash.com/photo-1593030942428-a5451dca4b42?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
+  "color": "blue",
+  "price": 30,
+  "category": "Mens",
+  "rating": 0,
+  "stock": 3,
+  "reviews": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1655265596471"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1655265596471"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a95aeb1ffe61ab4c674cb1"
+  },
+  "name": "Black Polo Shirt",
+  "description": "Fabric that's soft, light and breathable built for complete comfort.",
+  "image": "https://images.unsplash.com/photo-1625910513399-c9fcba54338c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+  "color": "black",
+  "price": 12.5,
+  "category": "Mens",
+  "rating": 0,
+  "stock": 2,
+  "reviews": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1655266027124"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1655266027124"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a95cc31ffe61ab4c674cb4"
+  },
+  "name": "Floral Shirt",
+  "description": "Floral shirt tailored for men.",
+  "image": "https://images.unsplash.com/photo-1517191297489-48c463380e8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+  "price": 15,
+  "category": "Mens",
+  "rating": 0,
+  "stock": 1,
+  "reviews": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1655266499908"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1655266499908"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a960311ffe61ab4c674cb7"
+  },
+  "name": "Floral Dress",
+  "description": "Effortlessly elegant look.",
+  "image": "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=746&q=80",
+  "color": "red",
+  "price": 20,
+  "category": "Womens",
+  "rating": 0,
+  "stock": 2,
+  "reviews": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1655267377696"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1655267377696"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a961b81ffe61ab4c674cba"
+  },
+  "name": "White Crop Top",
+  "description": "Great fit and easy to match casual wear.",
+  "image": "https://images.unsplash.com/photo-1506795660198-e95c77602129?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+  "color": "white",
+  "price": 17,
+  "category": "Womens",
+  "rating": 0,
+  "stock": 10,
+  "reviews": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1655267768762"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1655267768762"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a963601ffe61ab4c674cbd"
+  },
+  "name": "Gray Turtle Neck Sweater",
+  "description": "Stretchy breathable garment evoking a classy and elegant look.",
+  "image": "https://images.unsplash.com/photo-1552738352-a077028e482c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDh8fGJsb3VzZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+  "color": "gray",
+  "price": 25,
+  "category": "Womens",
+  "rating": 0,
+  "stock": 4,
+  "reviews": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1655268192827"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1655268192827"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a964d41ffe61ab4c674cc0"
+  },
+  "name": "Long Sleeve Blouse",
+  "description": "Suitable for casual, date, party, holiday occasions.",
+  "image": "https://images.unsplash.com/photo-1608234807905-4466023792f5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80",
+  "color": "white",
+  "price": 27.99,
+  "category": "Womens",
+  "rating": 0,
+  "stock": 6,
+  "reviews": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1655268564933"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1655268564933"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a96b9a1ffe61ab4c674cc3"
+  },
+  "name": "Brown Parka",
+  "description": "Built for those who have to work outside on the most ferociously cold days of the year.",
+  "image": "https://images.unsplash.com/photo-1461935793258-ac2ac2c930b2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+  "color": "brown",
+  "price": 38,
+  "category": "Jacket",
+  "rating": 0,
+  "stock": 3,
+  "reviews": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1655270298801"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1655270298801"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a96c0f1ffe61ab4c674cc6"
+  },
+  "name": "Blue Denim Jacket",
+  "description": "Classic and simple, very suitable as an extra layer in autumn, spring and winter.",
+  "image": "https://images.unsplash.com/photo-1527016021513-b09758b777bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80",
+  "size": "large",
+  "color": "blue",
+  "price": 24,
+  "category": "Jacket",
+  "rating": 0,
+  "stock": 15,
+  "reviews": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1655270415966"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1655270415966"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a96d8b1ffe61ab4c674cc9"
+  },
+  "name": "Black Puffer Jacket",
+  "description": "Water resistant makes you stay dry as you explore the outside.",
+  "image": "https://images.unsplash.com/photo-1572349618468-4e4208f41af2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=714&q=80",
+  "color": "black",
+  "price": 30,
+  "category": "Jacket",
+  "rating": 0,
+  "stock": 9,
+  "reviews": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1655270795852"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1655270795852"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a96f591ffe61ab4c674ccc"
+  },
+  "name": "Brown Leather Jacket",
+  "description": "A versatile choice that reveals your strong sense of fashion.",
+  "image": "https://images.unsplash.com/photo-1615233500240-56bfe34a3929?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+  "color": "brown",
+  "price": 23,
+  "category": "Jacket",
+  "rating": 0,
+  "stock": 4,
+  "reviews": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1655271257549"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1655271257549"
+    }
+  },
+  "__v": 0
+}]

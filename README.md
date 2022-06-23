@@ -1,6 +1,6 @@
 # Klaku Clothing API
 
-The API server for [Klaku Clothing](https://github.com/nacen-dev/klaku-client) built with Node.js
+The API server for [Klaku Clothing](https://github.com/nacen-dev/klaku-client) built with Node.js, Express, MongoDB
 
 ## How to use
 
@@ -24,6 +24,10 @@ Encode them in Base64 after generating the keys using this link: https://www.bas
 - `STRIPE_SECRET_KEY`: Enter your Stripe secret key you can get it from your [stripe dashboard](https://dashboard.stripe.com/test/apikeys)
 - `CLIENT_URL`: Enter the client/frontend application's url 
 - `DB_URI`: Enter your database URI
+
+### Populate Database with products
+
+Populate your database products collection using the products.json file in the root directory by using mongoimport or using mongodb compass
 
 ## Packages used
 
