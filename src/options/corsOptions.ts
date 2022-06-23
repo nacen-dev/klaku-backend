@@ -1,4 +1,5 @@
 import { CorsOptions } from "cors";
+import { log } from "../utils/logger";
 import { allowedOrigins } from "./allowedOrigins";
 
 export const corsOptions: CorsOptions = {
@@ -12,3 +13,5 @@ export const corsOptions: CorsOptions = {
   },
   optionsSuccessStatus: 200,
 };
+
+log.info(corsOptions)
