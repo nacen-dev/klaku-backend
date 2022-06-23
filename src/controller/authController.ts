@@ -40,11 +40,13 @@ export const createSessionHandler = async (
 
   const refreshToken = await signRefreshToken({ userId: user._id });
 
+  const MILLISECONDS_IN_YEAR = 31557600000;
+
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
     secure: true,
     sameSite: "none",
-    maxAge: 24 * 60 * 60 * 1000,
+    maxAge: MILLISECONDS_IN_YEAR,
   });
 
   return res.status(200).json({
@@ -57,6 +59,7 @@ export const refreshAccessTokenHandler = async (
   res: Response
 ) => {
   const refreshToken = get(req, "cookies.refreshToken");
+
   if (!refreshToken) return res.sendStatus(401);
 
   const refreshMessage = "Could not refresh the access token";
