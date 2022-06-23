@@ -11,5 +11,6 @@ export default {
     secure: "SMTP_SECURE",
   },
   stripeSecretKey: "STRIPE_SECRET_KEY",
-  clientURL: "CLIENT_URL"
+  clientURL: "CLIENT_URL",
+  dbURI: "DB_URI"
 };
