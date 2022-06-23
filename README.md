@@ -25,6 +25,15 @@ Encode them in Base64 after generating the keys using this link: https://www.bas
 - `CLIENT_URL`: Enter the client/frontend application's url 
 - `DB_URI`: Enter your database URI
 
+### Step 3. Install packages
+
+Use yarn or npm, if using npm delete yarn.lock first
+```
+npm install
+#or
+yarn install
+```
+
 ### Populate Database with products
 
 Populate your database products collection using the products.json file in the root directory by using mongoimport or using mongodb compass
