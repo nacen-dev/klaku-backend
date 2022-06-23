@@ -12,5 +12,6 @@ export default {
   },
   stripeSecretKey: "STRIPE_SECRET_KEY",
   clientURL: "CLIENT_URL",
-  dbURI: "DB_URI"
+  dbURI: "DB_URI",
+  port: "PORT"
 };
