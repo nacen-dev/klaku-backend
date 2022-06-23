@@ -83,7 +83,6 @@ export const createOrderHandler = async (
 
     const totalPrice =
       orderedItemsPrice + SHIPPING_PRICE + TAX_PRICE * orderedItemsPrice;
-    console.log("items", items);
 
     const orderItems: OrderItem[] = items.map((item) => ({
       productId: item._id,
