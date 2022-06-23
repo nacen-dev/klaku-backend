@@ -5,7 +5,9 @@
   "author": "nacen",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/app.ts"
+    "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
+    "start": "node build/src/app.js",
+    "build": "tsc"
   },
   "devDependencies": {
     "@types/config": "^0.0.41",
